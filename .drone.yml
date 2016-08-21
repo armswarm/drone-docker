@@ -4,7 +4,7 @@ pipeline:
     environment:
       - CGO_ENABLED=0
     commands:
-      - export OUTPUT_PATH=$(pwd)
+      - export OUTPUT_PATH=$PWD
       - apk add --no-cache git
       - git clone https://github.com/drone-plugins/drone-docker $GOPATH/src/github.com/drone-plugins/drone-docker
       - cd $GOPATH/github.com/drone-plugins/drone-docker
