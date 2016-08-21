@@ -4,10 +4,10 @@ pipeline:
     environment:
       - CGO_ENABLED=0
     commands:
-      - export OUTPUT_PATH=$PWD
+      - export OUTPUT_PATH=${PWD}
       - apk add --no-cache git
       - git clone https://github.com/drone-plugins/drone-docker $GOPATH/src/github.com/drone-plugins/drone-docker
-      - cd $GOPATH/github.com/drone-plugins/drone-docker
+      - cd $GOPATH/src/github.com/drone-plugins/drone-docker
       # Disabled: main.go:99: cli.StringSlice composite literal uses unkeyed fields
       # - go vet
       - go test -cover -coverprofile=coverage.out
