@@ -1,5 +1,7 @@
 FROM armhfbuild/docker:1.10-dind
 
+LABEL repository="https://github.com/armswarm/drone-docker"
+
 ENV PLUGIN_STORAGE_DRIVER overlay
 
 ADD drone-docker /bin/
