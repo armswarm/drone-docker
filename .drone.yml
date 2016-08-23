@@ -16,8 +16,7 @@ pipeline:
 
   docker:
     repo: armswarmdrone/docker
-    tag:
-      - "latest"
+    tag: [ "latest" ]
     when:
       branch: master
       event: push
