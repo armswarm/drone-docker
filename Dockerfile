@@ -1,4 +1,4 @@
-FROM armhfbuild/docker:1.10-dind
+FROM armhfbuild/docker:1.12-dind
 
 LABEL repository="https://github.com/armswarm/drone-docker"
 
