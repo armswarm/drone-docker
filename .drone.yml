@@ -1,6 +1,11 @@
 pipeline:
   build:
     image: armhfbuild/golang:1.6-alpine
+    build_args:
+      - VCS_REF=${DRONE_COMMIT_SHA}
+      - VCS_URL=${DRONE_REPO_LINK}
+      - BUILD_DATE=${DRONE_BUILD_CREATED}
+      - PROJECT_NAME=${DRONE_REPO}
     environment:
       - CGO_ENABLED=0
     commands:
