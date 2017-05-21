@@ -8,8 +8,7 @@ pipeline:
       - apk add --no-cache git
       - go get -d github.com/drone-plugins/drone-docker
       - cd $GOPATH/src/github.com/drone-plugins/drone-docker
-      # Disabled: main.go:99: cli.StringSlice composite literal uses unkeyed fields
-      # - go vet
+      - go vet
       - go test -cover -coverprofile=coverage.out
       - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo
       - cp drone-docker ${OUTPUT_PATH}
