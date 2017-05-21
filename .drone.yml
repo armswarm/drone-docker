@@ -22,5 +22,6 @@ pipeline:
       event: push
 
   slack:
+    image: armswarmdrone/slack
     when:
       status: [ failure, success ]
