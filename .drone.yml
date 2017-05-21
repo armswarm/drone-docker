@@ -1,12 +1,11 @@
 pipeline:
   build:
-    image: armhfbuild/golang:1.6-alpine
+    image: quay.io/armswarm/golang:1.8-alpine
     environment:
       - CGO_ENABLED=0
     commands:
       - export OUTPUT_PATH=${PWD}
-      - apk add --no-cache git
-      - git clone https://github.com/drone-plugins/drone-docker $GOPATH/src/github.com/drone-plugins/drone-docker
+      - go get -d github.com/drone-plugins/drone-docker
       - cd $GOPATH/src/github.com/drone-plugins/drone-docker
       # Disabled: main.go:99: cli.StringSlice composite literal uses unkeyed fields
       # - go vet
@@ -15,13 +14,9 @@ pipeline:
       - cp drone-docker ${OUTPUT_PATH}
 
   docker:
-    repo: armswarmdrone/docker
-    build_args:
-      - VCS_REF=${DRONE_COMMIT_SHA}
-      - VCS_URL=${DRONE_REPO_LINK}
-      - BUILD_DATE=${DRONE_BUILD_CREATED}
-      - PROJECT_NAME=${DRONE_REPO}
-    tag: [ "latest" ]
+    image: armswarmdrone/docker
+    repo: quay.io/armswarm/drone-docker
+    tag: [ "17.05", "17", "latest" ]
     when:
       branch: master
       event: push

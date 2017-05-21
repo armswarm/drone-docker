@@ -1,5 +1,6 @@
 # drone-docker
-[![](https://images.microbadger.com/badges/image/armswarmdrone/docker.svg)](https://microbadger.com/images/armswarmdrone/docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/armswarmdrone/docker.svg)](https://microbadger.com/images/armswarmdrone/docker "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/armswarmdrone/docker.svg)](https://microbadger.com/images/armswarmdrone/docker "Get your own commit badge on microbadger.com") [![Build Status](https://drone.veiled.land/api/badges/armswarm/drone-docker/status.svg)](https://drone.veiled.land/armswarm/drone-docker)
+
+[![Docker Repository on Quay](https://quay.io/repository/armswarm/drone-docker/status "Docker Repository on Quay")](https://quay.io/repository/armswarm/drone-docker)
 
 This builds the docker drone plugin for ARM.
 
