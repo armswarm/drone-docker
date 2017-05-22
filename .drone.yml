@@ -1,3 +1,9 @@
+platform: linux/arm
+
+workspace:
+  base: /go
+  path: src/github.com/armswarm/drone-docker
+
 clone:
   git:
     image: armswarmdrone/git
@@ -7,16 +13,14 @@ pipeline:
     image: quay.io/armswarm/golang:1.8-alpine
     environment:
       - CGO_ENABLED=0
+      - PACKAGE=github.com/drone-plugins/drone-docker
     commands:
-      - export OUTPUT_PATH=${PWD}
-      - go get -d github.com/drone-plugins/drone-docker
-      - cd $GOPATH/src/github.com/drone-plugins/drone-docker
-      - go vet
-      - go test -cover -coverprofile=coverage.out
-      - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo
-      - cp drone-docker ${OUTPUT_PATH}
+      - go get -d "${PACKAGE}"
+      - go vet "${PACKAGE}"
+      - go test -cover -coverprofile=coverage.out "${PACKAGE}"
+      - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o "${PACKAGE##*/}" "${PACKAGE}"
 
-  docker:
+  publish:
     image: armswarmdrone/docker
     repo: quay.io/armswarm/drone-docker
     tag: [ "17.05", "17", "latest" ]
@@ -24,7 +28,7 @@ pipeline:
       branch: master
       event: push
 
-  slack:
+  notify:
     image: armswarmdrone/slack
     when:
       status: [ failure, success ]
