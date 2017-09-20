@@ -25,7 +25,7 @@ pipeline:
     image: armswarmdrone/docker
     repo: quay.io/armswarm/drone-docker
     tag: [ "17.05", "17", "latest" ]
-    secrets: [ docker_username, docker_password ]
+    secrets: [ docker_username, docker_password, docker_registry ]
     when:
       branch: master
       event: push
