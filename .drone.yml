@@ -15,11 +15,11 @@ pipeline:
       - CGO_ENABLED=0
       - PACKAGE=github.com/drone-plugins/drone-docker
     commands:
-      - echo "${PACKAGE}"
-      - go get -d "${PACKAGE}"
-      - go vet "${PACKAGE}"
-      - go test -cover -coverprofile=coverage.out "${PACKAGE}"
-      - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o "${PACKAGE##*/}" "${PACKAGE}"
+      - echo "$${PACKAGE}"
+      - go get -d "$${PACKAGE}"
+      - go vet "$${PACKAGE}"
+      - go test -cover -coverprofile=coverage.out "$${PACKAGE}"
+      - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o "$${PACKAGE##*/}" "$${PACKAGE}"
 
   publish:
     image: armswarmdrone/docker
@@ -31,6 +31,7 @@ pipeline:
       event: push
 
   notify:
-    image: armswarmdrone/slack
+    image: quay.io/armswarm/drone-slack
+    secrets: [ slack_webhook, plugin_channel, plugin_template ]
     when:
       status: [ failure, success ]
