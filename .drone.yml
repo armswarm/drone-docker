@@ -19,7 +19,7 @@ pipeline:
       - go get -d "$${PACKAGE}"
       - go vet "$${PACKAGE}"
       - go test -cover -coverprofile=coverage.out "$${PACKAGE}"
-      - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o "$${PACKAGE##*/}" "$${PACKAGE}"
+      - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o "$${PACKAGE##*/}" "$${PACKAGE}/cmd/drone-docker"
 
   publish:
     image: armswarmdrone/docker
