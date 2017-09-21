@@ -6,7 +6,7 @@ workspace:
 
 clone:
   git:
-    image: armswarmdrone/git
+    image: quay.io/armswarm/drone-git
 
 pipeline:
   build:
