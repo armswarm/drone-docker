@@ -10,7 +10,7 @@ clone:
 
 pipeline:
   build:
-    image: quay.io/armswarm/golang:1.8-alpine
+    image: quay.io/armswarm/golang:1.9-alpine
     environment:
       - CGO_ENABLED=0
       - PACKAGE=github.com/drone-plugins/drone-docker
@@ -20,9 +20,8 @@ pipeline:
       - go vet "$${PACKAGE}"
       - go test -cover -coverprofile=coverage.out "$${PACKAGE}"
       - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o "$${PACKAGE##*/}" "$${PACKAGE}/cmd/drone-docker"
-
   publish:
-    image: armswarmdrone/docker
+    image: quay.io/armswarm/drone-docker
     repo: quay.io/armswarm/drone-docker
     tag: [ "17.05", "17", "latest" ]
     secrets: [ docker_username, docker_password, docker_registry ]
