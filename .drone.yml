@@ -20,10 +20,11 @@ pipeline:
       - go vet "$${PACKAGE}"
       - go test -cover "$${PACKAGE}/..."
       - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo -o "$${PACKAGE##*/}" "$${PACKAGE}/cmd/drone-docker"
+
   publish:
     image: quay.io/armswarm/drone-docker
     repo: quay.io/armswarm/drone-docker
-    tag: [ "17.05", "17", "latest" ]
+    tag: [ "17.10", "17", "latest" ]
     secrets: [ docker_username, docker_password, docker_registry ]
     when:
       branch: master

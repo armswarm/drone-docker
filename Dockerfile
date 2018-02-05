@@ -1,4 +1,4 @@
-FROM quay.io/armswarm/docker:17.05.0-ce-dind
+FROM quay.io/armswarm/docker:17.10.0-ce-dind
 
 ADD drone-docker /bin/
 
